@@ -1,0 +1,106 @@
+.product
+  padding-inline: 4rem
+
+  &-image
+    display: flex
+    overflow: hidden
+    img
+      width: 100%
+      border-radius: 1rem
+      transition: 1s
+      opacity: 0
+
+      &:first-child
+        opacity: 1
+
+    &:hover
+      cursor: pointer
+
+  &-thumbnails
+    display: grid
+    grid-template-columns: repeat(4, auto)
+    gap: 1rem
+    margin-block-start: 1rem
+
+    img
+      width: 100%
+      border-radius: 1rem
+
+      &:first-child
+        outline: var(--orange) 0.2rem solid
+        opacity: 0.5
+
+      &:hover
+        cursor: pointer
+        opacity: 50%
+
+.intro
+  padding-inline: 4rem
+  display: flex
+  flex-direction: column
+  justify-content: center
+
+  label
+    text-transform: uppercase
+    letter-spacing: 0.1rem
+    color: var(--orange)
+    font-weight: 700
+  h1
+    font-size: 3rem
+    color: var(--very-dark-blue)
+  p
+    color: var(--dark-grayish-blue)
+    line-height: 1.5rem
+  .price
+    display: flex
+    justify-content: space-between
+    h2
+      display: flex
+      align-items: center
+      span
+        font-size: 1rem
+        color: var(--orange)
+        margin-left: 1rem
+        background-color: var(--pale-orange)
+        padding: 0.25rem
+        border-radius: 0.5rem
+    h3
+      text-decoration: line-through
+      color: var(--dark-grayish-blue)
+  .btn
+    display: grid
+    grid-template-columns: calc(40% - 0.5rem ) calc(60% - 0.5rem)
+    gap: 1rem
+    &-plus-subtract
+      padding: 1rem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      background-color: var(--light-grayish-blue)
+      border-radius: 1rem
+
+      img
+        &:hover
+          cursor: pointer
+          opacity: 50%
+    &-add
+      border: none
+      display: flex
+      justify-content: center
+      align-items: center
+      padding: 1rem
+      background-color: var(--orange)
+      color: var(--pale-orange)
+      border-radius: 1rem
+      font-weight: 700
+      font-size: 1rem
+
+      &:hover
+        opacity: 50%
+
+      span
+        margin-left: 1rem
+
+  .disabled
+    opacity: 0.5
+    cursor: not-allowed
