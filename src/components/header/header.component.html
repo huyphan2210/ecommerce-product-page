@@ -1,0 +1,16 @@
+<div class="navigation">
+  <img (click)="openMenu()" src="../../assets/images/icon-menu.svg" alt="Menu" loading="lazy">
+  <img src="../../assets/images/logo.svg" alt="Logo" loading="lazy">
+  <nav #nav>
+    <ul>
+      <img (click)="closeMenu()" src="../../assets/images/icon-close.svg" alt="Close" loading="lazy">
+      <li *ngFor="let nav of navigations">
+        {{nav}}
+      </li>
+    </ul>
+  </nav>
+</div>
+<div class="user-cart">
+  <img src="../../assets/images/icon-cart.svg" alt="Cart" loading="lazy">
+  <img src="../../assets/images/image-avatar.png" alt="User" loading="lazy">
+</div>
