@@ -79,7 +79,7 @@ export class Main implements AfterViewInit {
       if (this.btnAdd && this.numberOfItems === 0) {
         this.btnAdd.nativeElement.style.opacity = '0.5';
         this.btnAdd.nativeElement.style.cursor = 'not-allowed';
-        this.btnAdd.nativeElement.setAttribute('disabled', 'true');
+        this.btnAdd.nativeElement.setAttribute('disabled', 'false');
       }
     }
   }
