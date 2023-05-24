@@ -1,3 +1,9 @@
-<header [numOfItems]="numOfItems"></header>
-<main (numOfItemsChange)="addItems($event)"></main>
+<header
+  [numOfItems]="numOfItems"
+  (deleteItemsEvent)="deleteItems($event)"
+></header>
+<main
+  (numOfItemsChange)="addItems($event)"
+  [isItemsRemove]="ItemsRemoveCount"
+></main>
 <footer></footer>

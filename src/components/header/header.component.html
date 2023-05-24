@@ -13,13 +13,20 @@
 <div class="user-cart">
   <div class="cart">
     <img (click)="handleCart()" src="../../assets/images/icon-cart.svg" alt="Cart" loading="lazy">
-    <span *ngIf="numOfItems !== 0">{{ numOfItems }}</span>
+    <span class="number" *ngIf="cartItemsNumber !== 0">{{ numOfItems }}</span>
     <div #cartItems class="cart-items">
       <h1>Cart</h1>
-      <div>
-        <p *ngIf="numOfItems === 0">Your cart is empty</p>
-        <div *ngIf="numOfItems !== 0">
+      <div class="cart-items-details">
+        <p id="empty" *ngIf="cartItemsNumber === 0">Your cart is empty</p>
+        <div class="cart-items-details-product" *ngIf="cartItemsNumber !== 0">
+          <img src="../../assets/images/image-product-1-thumbnail.jpg" alt="Product">
+          <div>
+            <p>Fall Limited Editon Sneakers</p>
+            <p>$125.00 x {{ cartItemsNumber }} <span>${{125 * cartItemsNumber}}.00</span></p>
+          </div>
+          <img (click)="deleteItems()" src="../../assets/images/icon-delete.svg" alt="Delete">
         </div>
+        <button class="checkout" *ngIf="cartItemsNumber !== 0" type="button">Checkout</button>
       </div>
     </div>
   </div>

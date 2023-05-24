@@ -50,8 +50,9 @@ img:hover
 
   .cart
     position: relative
+    color: var(--dark-grayish-blue)
 
-    span
+    .number
       color: var(--pale-orange)
       background: var(--orange)
       font-size: 0.8rem
@@ -65,20 +66,54 @@ img:hover
     &-items
       background: white
       position: absolute
-      top: 200%
+      top: 3rem
       left: 50%
       transform: translate(-50%)
-      min-width: 20rem
+      max-width: 25rem
+      width: 90vw
       visibility: hidden
+      box-shadow: 0 0 2rem hsla(0, 0, 0, 0.25)
+      border-radius: 1rem
 
       h1
         font-size: 1rem
         margin-block: 0
         padding: 1rem
         border-block-end: solid 0.1rem var(--grayish-blue)
-      div
+      &-details
         padding: 1rem
-        text-align: center
+
+        #empty
+          text-align: center
+
+        img:first-child
+          max-width: 3rem
+          border-radius: 0.5rem
+
+        &-product
+          display: flex
+          justify-content: space-between
+          align-items: center
+
+          span
+            color: var(--very-dark-blue)
+            font-weight: 700
+
+        .checkout
+          width: 100%
+          padding: 1rem
+          border: none
+          background: var(--orange)
+          color: var(--pale-orange)
+          text-align: center
+          border-radius: 1rem
+          font-weight: 700
+          font-size: 1rem
+          outline: none
+
+          &:hover
+            opacity: 0.5
+
 
   #user
     &:hover
@@ -103,6 +138,7 @@ img:hover
       height: 100%
       background-color: hsla(0, 0, 0, 0.75)
       visibility: hidden
+      z-index: 2
 
       ul
         position: absolute
@@ -130,3 +166,9 @@ img:hover
     img:last-child
       max-width: 2rem
       margin-left: 1rem
+
+    .cart
+      &-items
+        position: fixed
+        top: 6rem
+        z-index: 1

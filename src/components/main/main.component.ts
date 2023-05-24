@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output } from "@angular/core";
+import { Component, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output, Input, OnChanges } from "@angular/core";
 
 @Component({
   selector: 'main',
@@ -6,15 +6,23 @@ import { Component, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output }
   templateUrl: './main.component.html'
 })
 
-export class Main implements AfterViewInit {
+export class Main implements AfterViewInit, OnChanges {
   @ViewChild('productImage') productImage?: ElementRef<HTMLDivElement>;
 
   @ViewChild('productThumbnails') productThumbnails?: ElementRef<HTMLDivElement>;
 
+  @ViewChild('modal') modal?: ElementRef<HTMLElement>;
+
+  @ViewChild('productModalImage') productModalImage?: ElementRef<HTMLDivElement>;
+
+  @ViewChild('productModalThumbnails') productModalThumbnails?: ElementRef<HTMLDivElement>;
+
   @ViewChild('btnAdd') btnAdd?: ElementRef<HTMLButtonElement>;
 
+  @Input('isItemsRemove') isItemsRemove: number = 0;
+
   @Output() public numOfItemsChange: EventEmitter<number> = new EventEmitter<number>();
-  path = '../../assets/images/icon-minus.svg'
+
   companyName = 'Sneaker Company';
 
   productName = 'Fall Limited Editon Sneakers';
@@ -41,10 +49,44 @@ export class Main implements AfterViewInit {
     }
   }
 
+  ngOnChanges(): void {
+    if (this.isItemsRemove) {
+      this.numberOfCartItems = 0;
+    }
+  }
+
   public handleClickThumbnail(e: MouseEvent, index: number) {
     const imgElement = e.currentTarget as HTMLImageElement;
     if (this.productThumbnails) {
       const thumbnails = this.productThumbnails.nativeElement.getElementsByTagName('img');
+      for (let i = 0; i < thumbnails.length; i++) {
+        const thumbnail = thumbnails[i] as HTMLElement;
+        thumbnail.style.outline = 'none';
+        thumbnail.style.opacity = '1';
+      }
+    }
+
+    imgElement.style.outline = 'var(--orange) solid 0.2rem';
+    imgElement.style.opacity = '0.5';
+
+    if (this.productImage) {
+      const images = this.productImage.nativeElement.getElementsByClassName('img');
+      for (let i = 0; i < images.length; i++) {
+        const image = images[i] as HTMLElement;
+        image.style.transform = `translate(-${index * 100}%)`;
+        if (i === index) {
+          image.style.opacity = '1';
+        } else {
+          image.style.opacity = '0';
+        }
+      }
+    }
+  }
+
+  public handleClickModalThumbnail(e: MouseEvent, index: number) {
+    const imgElement = e.currentTarget as HTMLImageElement;
+    if (this.productModalThumbnails) {
+      const thumbnails = this.productModalThumbnails.nativeElement.getElementsByTagName('img');
       for (let i = 0; i < thumbnails.length; i++) {
         thumbnails[i].style.outline = 'none';
         thumbnails[i].style.opacity = '1';
@@ -54,8 +96,8 @@ export class Main implements AfterViewInit {
     imgElement.style.outline = 'var(--orange) solid 0.2rem';
     imgElement.style.opacity = '0.5';
 
-    if (this.productImage) {
-      const images = this.productImage.nativeElement.getElementsByTagName('img');
+    if (this.productModalImage) {
+      const images = this.productModalImage.nativeElement.getElementsByTagName('img');
       for (let i = 0; i < images.length; i++) {
         images[i].style.transform = `translate(-${index * 100}%)`;
         if (i === index) {
@@ -90,5 +132,70 @@ export class Main implements AfterViewInit {
     this.numberOfCartItems += this.numberOfItems;
 
     this.numOfItemsChange.emit(this.numberOfCartItems);
+  }
+
+  public turnModalOn() {
+    if (this.modal && (window.innerWidth / window.innerHeight > 1)) {
+      this.modal.nativeElement.style.display = 'block';
+    }
+  }
+
+  public closeModal() {
+    if (this.modal) {
+      this.modal.nativeElement.style.display = '';
+    }
+  }
+
+  public next() {
+    if (this.productImage) {
+      const images = this.productImage.nativeElement.getElementsByClassName('img');
+      for (let i = 0; i < images.length; i++) {
+
+        const image = images[i] as HTMLElement;
+        image.style.opacity = '1';
+        if (!image.style.transform) {
+          image.style.transform = 'translate(-100%)';
+        } else {
+          const transformProp = image.style.transform
+          switch (transformProp) {
+            case 'translate(-100%)':
+              image.style.transform = 'translate(-200%)';
+              break;
+            case 'translate(-200%)':
+              image.style.transform = 'translate(-300%)';
+              break;
+            default:
+              return;
+          }
+        }
+      }
+    }
+  }
+
+  public previous() {
+    if (this.productImage) {
+      const images = this.productImage.nativeElement.getElementsByClassName('img');
+      for (let i = 0; i < images.length; i++) {
+        const image = images[i] as HTMLElement;
+        if (!image.style.transform) {
+          return;
+        } else {
+          const transformProp = image.style.transform
+          switch (transformProp) {
+            case 'translate(-300%)':
+              image.style.transform = 'translate(-200%)';
+              break;
+            case 'translate(-200%)':
+              image.style.transform = 'translate(-100%)';
+              break;
+            case 'translate(-100%)':
+              image.style.transform = '';
+              break;
+            default:
+              return;
+          }
+        }
+      }
+    }
   }
 }

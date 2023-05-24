@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, Input } from "@angular/core";
+import { Component, ViewChild, ElementRef, Input, Output, EventEmitter, OnChanges } from "@angular/core";
 
 @Component({
   selector: 'header',
@@ -6,13 +6,24 @@ import { Component, ViewChild, ElementRef, Input } from "@angular/core";
   templateUrl: './header.component.html'
 })
 
-export class Header {
+export class Header implements OnChanges {
   @ViewChild('nav') nav?: ElementRef<HTMLElement>;
+
   @ViewChild('cartItems') cartItems?: ElementRef<HTMLDivElement>;
 
   @Input('numOfItems') numOfItems: number = 0;
 
+  @Output('deleteItemsEvent') deleteItemsEvent: EventEmitter<number> = new EventEmitter();
+
+  count = 0;
+
+  cartItemsNumber = this.numOfItems;
+
   navigations = ['Collections', 'Men', 'Women', 'About', 'Contact'];
+
+  ngOnChanges(): void {
+    this.cartItemsNumber = this.numOfItems;
+  }
 
   public openMenu():void {
     this.nav?.nativeElement.setAttribute('style', 'visibility: visible;');
@@ -36,5 +47,11 @@ export class Header {
         this.cartItems.nativeElement.style.visibility = '';
       }
     }
+  }
+
+  public deleteItems() {
+    this.count += 1;
+    this.deleteItemsEvent.emit(this.count);
+    this.cartItemsNumber = 0;
   }
 }

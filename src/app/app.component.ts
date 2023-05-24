@@ -10,7 +10,13 @@ export class AppComponent {
 
   numOfItems = 0;
 
+  ItemsRemoveCount = 0;
+
   public addItems(num: number) {
     this.numOfItems = num;
+  }
+
+  public deleteItems(removeCount: number) {
+    this.ItemsRemoveCount += removeCount;
   }
 }
