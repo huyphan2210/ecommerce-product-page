@@ -22,23 +22,27 @@ img:hover
         font-weight: 400
         color: var(--dark-grayish-blue)
 
-        &::after
+        &::after, &::before
           position: absolute
-          width: 100%
+          width: 0
           content: ''
           height: 0.2rem
           background-color: var(--orange)
           bottom: -3.1rem
-          left: 0
+          left: 50%
           z-index: 1
-          display: none
+          transition: 0.5s
+
+        &::before
+          left: unset
+          right: 50%
 
         &:hover
           cursor: pointer
           color: var(--very-dark-blue)
 
-          &::after
-            display: block
+          &::after, &::before
+            width: 50%
 
 .user-cart
   display: flex
