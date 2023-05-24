@@ -11,6 +11,17 @@
   </nav>
 </div>
 <div class="user-cart">
-  <img src="../../assets/images/icon-cart.svg" alt="Cart" loading="lazy">
-  <img src="../../assets/images/image-avatar.png" alt="User" loading="lazy">
+  <div class="cart">
+    <img (click)="handleCart()" src="../../assets/images/icon-cart.svg" alt="Cart" loading="lazy">
+    <span *ngIf="numOfItems !== 0">{{ numOfItems }}</span>
+    <div #cartItems class="cart-items">
+      <h1>Cart</h1>
+      <div>
+        <p *ngIf="numOfItems === 0">Your cart is empty</p>
+        <div *ngIf="numOfItems !== 0">
+        </div>
+      </div>
+    </div>
+  </div>
+  <img id="user" src="../../assets/images/image-avatar.png" alt="User" loading="lazy">
 </div>

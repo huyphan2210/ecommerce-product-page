@@ -52,8 +52,6 @@
     color: var(--dark-grayish-blue)
     line-height: 1.5rem
   .price
-    display: flex
-    justify-content: space-between
     h2
       display: flex
       align-items: center
@@ -104,3 +102,10 @@
   .disabled
     opacity: 0.5
     cursor: not-allowed
+
+
+@media screen and (max-aspect-ratio: 1)
+  .intro
+    .price
+      display: flex
+      justify-content: space-between

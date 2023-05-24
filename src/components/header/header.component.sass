@@ -48,6 +48,43 @@ img:hover
   display: flex
   align-items: center
 
+  .cart
+    position: relative
+
+    span
+      color: var(--pale-orange)
+      background: var(--orange)
+      font-size: 0.8rem
+      position: absolute
+      transform: translate(0, -50%)
+      top: 0
+      left: 50%
+      padding-inline: 0.5rem
+      border-radius: 1rem
+
+    &-items
+      background: white
+      position: absolute
+      top: 200%
+      left: 50%
+      transform: translate(-50%)
+      min-width: 20rem
+      visibility: hidden
+
+      h1
+        font-size: 1rem
+        margin-block: 0
+        padding: 1rem
+        border-block-end: solid 0.1rem var(--grayish-blue)
+      div
+        padding: 1rem
+        text-align: center
+
+  #user
+    &:hover
+      outline: solid var(--orange) 0.2rem
+      border-radius: 50%
+
   img:last-child
     max-width: 3rem
     margin-left: 2rem

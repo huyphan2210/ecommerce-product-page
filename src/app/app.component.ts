@@ -7,4 +7,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ecommerce-product-page';
+
+  numOfItems = 0;
+
+  public addItems(num: number) {
+    this.numOfItems = num;
+  }
 }

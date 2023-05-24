@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from "@angular/core";
+import { Component, ViewChild, ElementRef, Input } from "@angular/core";
 
 @Component({
   selector: 'header',
@@ -8,6 +8,9 @@ import { Component, ViewChild, ElementRef } from "@angular/core";
 
 export class Header {
   @ViewChild('nav') nav?: ElementRef<HTMLElement>;
+  @ViewChild('cartItems') cartItems?: ElementRef<HTMLDivElement>;
+
+  @Input('numOfItems') numOfItems: number = 0;
 
   navigations = ['Collections', 'Men', 'Women', 'About', 'Contact'];
 
@@ -23,5 +26,15 @@ export class Header {
     setTimeout(() => {
       this.nav?.nativeElement.setAttribute('style', '');
     }, 1000)
+  }
+
+  public handleCart() {
+    if (this.cartItems) {
+      if (!this.cartItems.nativeElement.style.visibility) {
+        this.cartItems.nativeElement.style.visibility = 'visible';
+      } else {
+        this.cartItems.nativeElement.style.visibility = '';
+      }
+    }
   }
 }

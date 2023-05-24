@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef, AfterViewInit } from "@angular/core";
+import { Component, ViewChild, ElementRef, AfterViewInit, EventEmitter, Output } from "@angular/core";
 
 @Component({
   selector: 'main',
@@ -13,6 +13,8 @@ export class Main implements AfterViewInit {
 
   @ViewChild('btnAdd') btnAdd?: ElementRef<HTMLButtonElement>;
 
+  @Output() public numOfItemsChange: EventEmitter<number> = new EventEmitter<number>();
+  path = '../../assets/images/icon-minus.svg'
   companyName = 'Sneaker Company';
 
   productName = 'Fall Limited Editon Sneakers';
@@ -30,11 +32,12 @@ export class Main implements AfterViewInit {
 
   numberOfItems = 0;
 
+  numberOfCartItems = 0;
+
   ngAfterViewInit(): void {
     if (this.btnAdd) {
       this.btnAdd.nativeElement.style.opacity = '0.5';
       this.btnAdd.nativeElement.style.cursor = 'not-allowed';
-      this.btnAdd.nativeElement.setAttribute('disabled', 'true');
     }
   }
 
@@ -69,7 +72,6 @@ export class Main implements AfterViewInit {
     if (this.btnAdd) {
       this.btnAdd.nativeElement.style.opacity = '';
       this.btnAdd.nativeElement.style.cursor = '';
-      this.btnAdd.nativeElement.setAttribute('disabled', '');
     }
   }
 
@@ -79,8 +81,14 @@ export class Main implements AfterViewInit {
       if (this.btnAdd && this.numberOfItems === 0) {
         this.btnAdd.nativeElement.style.opacity = '0.5';
         this.btnAdd.nativeElement.style.cursor = 'not-allowed';
-        this.btnAdd.nativeElement.setAttribute('disabled', 'false');
       }
     }
+  }
+
+  public addItemsToCart() {
+    if (this.numberOfItems === 0) return;
+    this.numberOfCartItems += this.numberOfItems;
+
+    this.numOfItemsChange.emit(this.numberOfCartItems);
   }
 }
