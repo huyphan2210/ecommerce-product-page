@@ -150,9 +150,7 @@ export class Main implements AfterViewInit, OnChanges {
     if (this.productImage) {
       const images = this.productImage.nativeElement.getElementsByClassName('img');
       for (let i = 0; i < images.length; i++) {
-
         const image = images[i] as HTMLElement;
-        image.style.opacity = '1';
         if (!image.style.transform) {
           image.style.transform = 'translate(-100%)';
         } else {
